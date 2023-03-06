@@ -66,7 +66,7 @@ function createNewGame(difficulty){
 }
 
 
-//creo la grigllia usando una funzione che crea la singola cella
+//creo la griglia usando una funzione che crea la singola cella
 function createGameGrid(squares, squaresRow){
 
   gridDom.innerHTML = "";
