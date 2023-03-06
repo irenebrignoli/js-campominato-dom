@@ -69,47 +69,45 @@ function createNewGame(difficulty){
 
 
 
-
-
-
-
-
 //creo la griglia usando una funzione che crea la singola cella
 function createGameGrid(squares, squaresRow){
 
   gridDom.innerHTML = "";
-  let currentSquare;
-  let i;
 
-  for(i = 1; i <= squares; i++){
-    currentSquare = generateSquare(squaresRow, i);
+  let blacklist = []; //lista bombe
+
+  //creo lista bombe
+  for(let c = 1; c <= 16; c++){
+
+    let bombNumber = generateUniqueRandomNumber(blacklist, 1, squares);
+    blacklist.push(bombNumber);
+    console.log(bombNumber);
+  }
+
+  console.log(blacklist);
+
+  //creo il campo di gioco
+  for(let i = 1; i <= squares; i++){
+    const currentSquare = generateSquare(squaresRow, i);
 
     currentSquare.addEventListener('click',
       function(){
       this.classList.toggle('clicked');
-      console.log('cliccato '+ i);
+      console.log(i);
       }
     );
 
     gridDom.append(currentSquare);
 
-  }
-
-  let blacklist = [];
-
-  for(let c = 1; c <= 16; c++){
-
-    const bombNumber = generateUniqueRandomNumber(blacklist, 1, squares);
-    blacklist.push(bombNumber);
-    console.log(bombNumber);
-
-    if(bombNumber == i){
+    if(blacklist == i){
       currentSquare.classList.add('bomb');
     }
+
   }
 
   
 }
+
 
 //creo la cella
 function generateSquare(squaresRow, number){
