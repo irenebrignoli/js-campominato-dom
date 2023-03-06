@@ -97,16 +97,16 @@ function createGameGrid(squares, squaresRow){
 
   let blacklist = [];
 
-    for(let c = 1; c <= 16; c++){
+  for(let c = 1; c <= 16; c++){
 
-      const bombNumber = generateUniqueRandomNumber(blacklist, 1, squares);
-      blacklist.push(bombNumber);
-      console.log(bombNumber);
+    const bombNumber = generateUniqueRandomNumber(blacklist, 1, squares);
+    blacklist.push(bombNumber);
+    console.log(bombNumber);
 
-      if(bombNumber == i){
-        currentSquare.classList.add('bomb');
-      }
+    if(bombNumber == i){
+      currentSquare.classList.add('bomb');
     }
+  }
 
   
 }
