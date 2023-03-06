@@ -61,14 +61,6 @@ header a:visited{
   flex-wrap: wrap;
 }
 
-.d-none{
-  display: none;
-}
-
-.show{
-  display: flex;
-}
-
 .square{
   border: #505050 2px solid;
   display: flex;
