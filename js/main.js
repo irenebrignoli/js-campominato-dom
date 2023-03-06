@@ -46,16 +46,16 @@ function createNewGame(difficulty){
 
   switch (difficulty){
 
-    case "1":
-      squares: 100;
+    case "easy":
+      squares = 100;
       break;
 
-    case "2":
-      squares: 81;
+    case "hard":
+      squares = 81;
       break;
     
-    case "3":
-      squares: 49;
+    case "crazy":
+      squares = 49;
       break;
   }
 
