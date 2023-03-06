@@ -1,7 +1,7 @@
 
 /*
 Consegna
-Copiamo la griglia fatta ieri nella nuova repo e aggiungiamo la logica del gioco (attenzione: non bisogna copiare tutta la cartella dell’esercizio ma solo l’index.html, e le cartelle js/ css/ con i relativi script e fogli di stile, per evitare problemi con l’inizializzazione di git).
+
 Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe. Attenzione: nella stessa cella può essere posizionata al massimo una bomba, perciò nell’array delle bombe non potranno esserci due numeri uguali.
 In seguito l’utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. Altrimenti la cella cliccata si colora di azzurro e l’utente può continuare a cliccare sulle altre celle.
 La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
@@ -44,6 +44,7 @@ function createNewGame(difficulty){
   let squares;
   let squaresRow;
 
+
   switch (difficulty){
 
     case "easy":
@@ -63,24 +64,51 @@ function createNewGame(difficulty){
 
   createGameGrid(squares, squaresRow);
 
+  
 }
+
+
+
+
+
+
 
 
 //creo la griglia usando una funzione che crea la singola cella
 function createGameGrid(squares, squaresRow){
 
   gridDom.innerHTML = "";
+  let currentSquare;
+  let i;
 
-  for(let i = 1; 1 <= squares; i++){
-    const currentSquare = generateSquare(squaresRow, i);
+  for(i = 1; i <= squares; i++){
+    currentSquare = generateSquare(squaresRow, i);
+
     currentSquare.addEventListener('click',
       function(){
       this.classList.toggle('clicked');
+      console.log('cliccato '+ i);
       }
     );
 
     gridDom.append(currentSquare);
+
   }
+
+  let blacklist = [];
+
+    for(let c = 1; c <= 16; c++){
+
+      const bombNumber = generateUniqueRandomNumber(blacklist, 1, squares);
+      blacklist.push(bombNumber);
+      console.log(bombNumber);
+
+      if(bombNumber == i){
+        currentSquare.classList.add('bomb');
+      }
+    }
+
+  
 }
 
 //creo la cella
@@ -94,3 +122,28 @@ function generateSquare(squaresRow, number){
 
   return square;
 }
+
+//genera numero casuale che non si ripete
+function generateUniqueRandomNumber(blacklist, min, max){
+
+  let validNumber = false;
+  let randomNumber;
+
+  while (!validNumber){
+    randomNumber = generateRandomNumber(min, max);
+    if (!blacklist.includes(randomNumber)){
+      validNumber = true;
+    }
+  }
+
+  return randomNumber;
+}
+
+//genera numero casuale
+function generateRandomNumber(min, max){
+
+  const number = Math.floor(Math.random() * (max - min +1)) + min;
+  return number;
+}
+
+
