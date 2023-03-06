@@ -59,6 +59,7 @@ header a:visited{
   height: 500px;
   width: 500px;
   flex-wrap: wrap;
+  display: flex;
 }
 
 .square{
@@ -69,21 +70,6 @@ header a:visited{
   font-size: 14px;
   color: #505050;
 }
-
-/* .easy{
-  width: calc(100% / 10);
-  height: calc(100% / 10);
-} 
-
-.hard{
-  width: calc(100% / 9);
-  height: calc(100% / 9);
-}
-
-.crazy{
-  width: calc(100% / 7);
-  height: calc(100% / 7);
-} */
 
 .square.clicked{
   background-color: rgb(241, 168, 99);

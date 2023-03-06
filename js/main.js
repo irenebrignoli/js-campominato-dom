@@ -21,35 +21,17 @@ Le validazioni e i controlli possiamo farli anche in un secondo momento.
 */
 
 const playDom = document.getElementById('play');
+const difficultyDom = document.getElementById('difficulty');
 const gridDom = document.getElementById('grid');
 
-playDom.addEventListener('click', 
-
-  function(){
-    gridDom.innerHTML = "";
-    let game = createNewGame();
-    gridDom.innerHTML = game;
+playDom.addEventListener('click', function(){
     
-    /*
-    square.addEventListener('click',
-      function(){
-      this.classList.toggle('clicked');
-      console.log(i);
-      }
-    )*/
+  const difficulty = difficultyDom.value;
+  createNewGame(difficulty);
+    
   }
 
-
-
 );
-
-
-
-
-
-
-
-
 
 
 
@@ -57,10 +39,7 @@ playDom.addEventListener('click',
 //FUNCTIONS
 
 //do istruzioni in base alla difficoltà
-function createNewGame(){
-
-  const difficultyDom = document.getElementById('difficulty');
-  const difficulty = difficultyDom.value;
+function createNewGame(difficulty){
 
   let squares;
   let squaresRow;
@@ -90,20 +69,28 @@ function createNewGame(){
 //creo la grigllia usando una funzione che crea la singola cella
 function createGameGrid(squares, squaresRow){
 
+  gridDom.innerHTML = "";
+
   for(let i = 1; 1 <= squares; i++){
-    generateGridSquare(squaresRow);
+    const currentSquare = generateSquare(squaresRow, i);
+    currentSquare.addEventListener('click',
+      function(){
+      this.classList.toggle('clicked');
+      }
+    );
+
+    gridDom.append(currentSquare);
   }
 }
 
-
 //creo la cella
-function generateGridSquare(squaresRow){
+function generateSquare(squaresRow, number){
 
   const square = document.createElement('div');
   square.classList.add('square');
   square.style.width = `calc(100% / ${squaresRow})`;
   square.style.height = `calc(100% / ${squaresRow})`;
-  square.innerHTML = `<div>${i}</div>`;
+  square.innerHTML = `<div">${number}</div>`;
 
   return square;
 }
